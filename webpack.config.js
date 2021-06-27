@@ -1,18 +1,18 @@
-const webpack = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const port = 3000;
 
 module.exports = {
     // webpack 설정 코드 작성. 작성된 코드는 module.export로 내보냄
-    mode: "development",
-    entry: "./src/index.js",
+    mode: 'development',
+    entry: './src/index.js',
     output: {
-        path: path.resolve(__dirname, "dist"),
-        filename: "bundle.[hash].js",
-        publicPath: "/",
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundle.[hash].js',
+        publicPath: '/',
     },
     module: {
         rules: [
@@ -21,12 +21,10 @@ module.exports = {
                 exclude: /node_modules/,
                 use: [
                     {
-                        loader: "babel-loader",
+                        loader: 'babel-loader',
                         options: {
-                            presets: [
-                                "@babel/preset-env",
-                                "@babel/preset-react",
-                            ],
+                            presets: ['@babel/preset-env', '@babel/preset-react'],
+                            plugins: ['@babel/plugin-proposal-class-properties'],
                         },
                     },
                 ],
@@ -35,10 +33,10 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     {
-                        loader: "style-loader",
+                        loader: 'style-loader',
                     },
                     {
-                        loader: "css-loader",
+                        loader: 'css-loader',
                         options: {
                             modules: true,
                             camelCase: true,
@@ -50,15 +48,18 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, "public/index.html"),
-            filename: "index.html",
+            template: path.resolve(__dirname, 'public/index.html'),
+            filename: 'index.html',
         }),
         new MiniCssExtractPlugin({
-            filename: "App.css",
+            filename: 'App.css',
         }),
     ],
+    resolve: {
+        extensions: ['.js', '.jsx', '.webpack.js', '.web.js', '.mjs', '.ts', '.tsx', '.json'],
+    },
     devServer: {
-        host: "localhost",
+        host: 'localhost',
         port: port,
         open: true,
         historyApiFallback: true,
