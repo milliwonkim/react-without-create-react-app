@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const WebpackBundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const port = 3000;
 
@@ -127,11 +126,6 @@ module.exports = (arg1, { WEBPACK_SERVE, mode }) => {
             new MiniCssExtractPlugin({
                 filename: '[name].css',
                 chunkFilename: '[id].css',
-            }),
-            new WebpackBundleAnalyzer({
-                // analyzerMode: 'static',
-                // reportFilename: 'webpack-bundle-size-analyze-report.md',
-                // openAnalyzer: true,
             }),
         ],
         resolve: {
