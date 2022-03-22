@@ -1,1 +1,0 @@
-(self.webpackChunkno_cra_react_project=self.webpackChunkno_cra_react_project||[]).push([[323],{323:(e,t,c)=>{"use strict";c.r(t),c.d(t,{default:()=>n});var r=c(294);const n=function(){return r.createElement("div",null,r.createElement("h1",null,"Two"))}}}]);

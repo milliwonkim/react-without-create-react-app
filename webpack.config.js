@@ -7,8 +7,6 @@ const TerserPlugin = require('terser-webpack-plugin');
 const port = 3000;
 
 module.exports = (arg1, { WEBPACK_SERVE, mode }) => {
-    console.log('arg1, WEBPACK_SERVE, mode', WEBPACK_SERVE, mode);
-    const isEnvDevelopment = mode === 'development';
     const isEnvProduction = mode === 'production';
     const isEnvProductionProfile = isEnvProduction && process.argv.includes('--profile');
 
@@ -21,6 +19,11 @@ module.exports = (arg1, { WEBPACK_SERVE, mode }) => {
             filename: '[name].js',
             chunkFilename: '[name].chunk.js',
             publicPath: '/',
+        },
+        performance: {
+            hints: false,
+            maxEntrypointSize: 512000,
+            maxAssetSize: 512000,
         },
         optimization: {
             minimize: true,
@@ -79,7 +82,7 @@ module.exports = (arg1, { WEBPACK_SERVE, mode }) => {
         module: {
             rules: [
                 {
-                    test: /\.(js|jsx)$/,
+                    test: /\.(js|jsx|ts|tsx)$/,
                     exclude: [/node_modules/],
                     use: [
                         {
@@ -131,6 +134,7 @@ module.exports = (arg1, { WEBPACK_SERVE, mode }) => {
         resolve: {
             extensions: ['.js', '.jsx', '.webpack.js', '.web.js', '.mjs', '.ts', '.tsx', '.json'],
         },
+        devtool: 'inline-source-map',
         devServer: {
             host: 'localhost',
             port: port,
